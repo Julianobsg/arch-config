@@ -4,7 +4,7 @@ DISK='/dev/sda'
 
 config_partitions() {
   local boot_size=256
-  local memory=vmstat -s -S M | grep 'total memory' | tr -dc '0-9'
+  local memory=$(vmstat -s -S M | grep 'total memory' | tr -dc '0-9')
   local memory_addr=$(($memory + $boot_size))M
 
   echo "Formatting disk"
@@ -15,13 +15,13 @@ config_partitions() {
     mkpart primary linux-swap "$boot_size"M  $memory_addr \
     set 1 boot on \
     set 2 LVM on \
-    set 3 SWAP on
+    set 3 LVM on
 }
 
 format_disk() {
-  local boot_dev="$DRIVE"1
-  local lvm_dev="$DRIVE"2
-  local swap_dev="$DRIVE"3
+  local boot_dev="$DISK"1
+  local lvm_dev="$DISK"2
+  local swap_dev="$DISK"3
 
   config_partitions
 
