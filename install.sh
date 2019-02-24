@@ -35,8 +35,13 @@ format_disk() {
   mount $boot_dev /mnt/boot
 }
 
+install_base() {
+    pacstrap /mnt base base-devel
+}
+
 install_arch() {
   format_disk
+  install_base
 }
 
 install_arch
