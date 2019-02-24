@@ -36,12 +36,18 @@ format_disk() {
 }
 
 install_base() {
-    pacstrap /mnt base base-devel
+  pacstrap /mnt base base-devel
+}
+
+config_system() {
+  genfstab -U /mnt >> /mnt/etc/fstab
+  arch-chroot /mnt
 }
 
 install_arch() {
   format_disk
   install_base
+  config_system
 }
 
 install_arch
