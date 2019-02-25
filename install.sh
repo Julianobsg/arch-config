@@ -2,6 +2,9 @@
 
 DISK='/dev/sda'
 
+# System configuration variables
+TIMEZONE='America/Sao_Paulo'
+
 config_partitions() {
   local boot_size=256
   local memory=$(vmstat -s -S M | grep 'total memory' | tr -dc '0-9')
@@ -42,6 +45,8 @@ install_base() {
 config_system() {
   genfstab -U /mnt >> /mnt/etc/fstab
   arch-chroot /mnt
+  ln -sT "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
+  hwclock --systohc
 }
 
 install_arch() {
