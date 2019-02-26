@@ -60,6 +60,11 @@ set_hostname() {
 EOF
 }
 
+set_root_password() {
+  echo "Set your root password"
+  passwd
+}
+
 config_system() {
   genfstab -U /mnt >> /mnt/etc/fstab
   arch-chroot /mnt
@@ -67,6 +72,7 @@ config_system() {
   hwclock --systohc
   config_locale
   set_hostname
+  set_root_password
 }
 
 install_arch() {
