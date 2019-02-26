@@ -50,12 +50,23 @@ config_locale() {
   locale-gen
 }
 
+set_hostname() {
+  echo "Set your hostname:"
+  read hostname
+  cat > /etc/hosts <<EOF
+127.0.0.1 localhost
+::1  localhost
+127.0.1.1 "$hostname".localdomain	$hostname
+EOF
+}
+
 config_system() {
   genfstab -U /mnt >> /mnt/etc/fstab
   arch-chroot /mnt
   ln -sT "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
   hwclock --systohc
   config_locale
+  set_hostname
 }
 
 install_arch() {
