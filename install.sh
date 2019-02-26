@@ -4,6 +4,7 @@ DISK='/dev/sda'
 
 # System configuration variables
 TIMEZONE='America/Sao_Paulo'
+LOCALE='pt_BR.UTF-8 UTF-8'
 
 config_partitions() {
   local boot_size=256
@@ -42,11 +43,19 @@ install_base() {
   pacstrap /mnt base base-devel
 }
 
+config_locale() {
+  echo 'LANG="en_US.UTF-8"' >> /etc/locale.conf
+  echo 'LC_COLLATE="C"' >> /etc/locale.conf
+  echo  $LOCALE >> /etc/locale.gen
+  locale-gen
+}
+
 config_system() {
   genfstab -U /mnt >> /mnt/etc/fstab
   arch-chroot /mnt
   ln -sT "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
   hwclock --systohc
+  config_locale
 }
 
 install_arch() {
