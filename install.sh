@@ -8,7 +8,7 @@ LOCALE='pt_BR.UTF-8 UTF-8'
 
 user_configurations() {
   echo "Choose your user name"
-  read USER
+  read USERNAME
   echo "Set your root password"
   read -s PASSWORD
   echo "Set your hostname:"
@@ -67,8 +67,8 @@ EOF
 
 create_user() {
   echo "Creating user"
-  useradd -m -s /bin/zsh -G root sudo "$USER"
-  echo -en "$PASSWORD\n$PASSWORD" | passwd "$USER"
+  useradd -m -s /bin/zsh -G root sudo "$USERNAME"
+  echo -en "$PASSWORD\n$PASSWORD" | passwd "$USERNAME"
 }
 
 config_system() {
@@ -89,7 +89,7 @@ finish_installation() {
 }
 
 install_arch() {
-  if [ -z "$USER" ]
+  if [ -z "$USERNAME" ]
   then
     user_configurations
   fi
@@ -103,7 +103,7 @@ install_arch() {
     install_base
     genfstab -U /mnt >> /mnt/etc/fstab
     cp $0 /mnt/install.sh
-    arch-chroot /mnt USER=$USER PASSWORD=$PASSWORD HOSTNAME=$HOSTNAME ./install.sh config
+    arch-chroot /mnt USERNAME=$USERNAME PASSWORD=$PASSWORD HOSTNAME=$HOSTNAME ./install.sh config
   fi
 }
 
