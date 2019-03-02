@@ -111,4 +111,4 @@ install_arch() {
   fi
 }
 
-install_arch
+install_arch $1 $2 $3 $4
