@@ -5,6 +5,9 @@ DISK='/dev/sda'
 # System configuration variables
 TIMEZONE='America/Sao_Paulo'
 LOCALE='pt_BR.UTF-8 UTF-8'
+USERNAME=$2
+PASSWORD=$3
+HOSTNAME=$4
 
 user_configurations() {
   echo "Choose your user name"
@@ -67,7 +70,7 @@ EOF
 
 create_user() {
   echo "Creating user"
-  useradd -m -s /bin/zsh -G root sudo "$USERNAME"
+  useradd -m -s /bin/zsh -G root "$USERNAME"
   echo -en "$PASSWORD\n$PASSWORD" | passwd "$USERNAME"
 }
 
@@ -89,13 +92,9 @@ finish_installation() {
 }
 
 install_arch() {
-  if [ -z "$2" ]
+  if [ -z "$USERNAME" ]
   then
     user_configurations
-  else
-    $USERNAME = $2
-    $PASSWORD = $3
-    $HOSTNAME = $4
   fi
 
   if [ "$1" == "config" ]
