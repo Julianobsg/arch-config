@@ -29,7 +29,7 @@ config_partitions() {
     mkpart primary ext2 1 "$boot_size"M \
     mkpart primary ext4 $memory_addr 100% \
     mkpart primary linux-swap "$boot_size"M  $memory_addr \
-    set 1 boot on \
+    set 1 bios_grub on \
     set 2 LVM on \
     set 3 LVM on
 }
@@ -87,6 +87,7 @@ config_system() {
 install_grub() {
   pacman -Sy grub
   grub-install --target=i386-pc $DISK
+  grub-mkconfig -o /boot/grub/grub.cfg
 }
 
 finish_installation() {
