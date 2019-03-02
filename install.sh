@@ -5,6 +5,18 @@ DISK='/dev/sda'
 # System configuration variables
 TIMEZONE='America/Sao_Paulo'
 LOCALE='pt_BR.UTF-8 UTF-8'
+USERNAME=
+PASSWORD=
+HOSTNAME=
+
+user_configurations() {
+  echo "Choose your user name"
+  read USERNAME
+  echo "Set your root password"
+  read -s PASSWORD
+  echo "Set your hostname:"
+  read HOSTNAME
+}
 
 config_partitions() {
   local boot_size=256
@@ -51,18 +63,16 @@ config_locale() {
 }
 
 set_hostname() {
-  echo "Set your hostname:"
-  read hostname
   cat > /etc/hosts <<EOF
 127.0.0.1 localhost
 ::1  localhost
-127.0.1.1 "$hostname".localdomain	$hostname
+127.0.1.1 "$HOSTNAME".localdomain	$HOSTNAME
 EOF
 }
 
-set_root_password() {
-  echo "Set your root password"
-  passwd
+create_user() {
+  useradd -m -s /bin/zsh -G root sudo "$USERNAME"
+  echo -en "$PASSWORD\n$PASSWORD" | passwd "$USERNAME"
 }
 
 config_system() {
@@ -72,10 +82,12 @@ config_system() {
   hwclock --systohc
   config_locale
   set_hostname
-  set_root_password
+  echo -en "$PASSWORD\n$PASSWORD" | passwd
+  create_user
 }
 
 install_arch() {
+  user_configurations
   format_disk
   install_base
   config_system
