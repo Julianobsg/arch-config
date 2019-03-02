@@ -5,13 +5,10 @@ DISK='/dev/sda'
 # System configuration variables
 TIMEZONE='America/Sao_Paulo'
 LOCALE='pt_BR.UTF-8 UTF-8'
-USERNAME=
-PASSWORD=
-HOSTNAME=
 
 user_configurations() {
   echo "Choose your user name"
-  read USERNAME
+  read USER
   echo "Set your root password"
   read -s PASSWORD
   echo "Set your hostname:"
@@ -70,13 +67,11 @@ EOF
 
 create_user() {
   echo "Creating user"
-  useradd -m -s /bin/zsh -G root sudo "$USERNAME"
-  echo -en "$PASSWORD\n$PASSWORD" | passwd "$USERNAME"
+  useradd -m -s /bin/zsh -G root sudo "$USER"
+  echo -en "$PASSWORD\n$PASSWORD" | passwd "$USER"
 }
 
 config_system() {
-  genfstab -U /mnt >> /mnt/etc/fstab
-  arch-chroot /mnt
   echo "Start system configurations"
   ln -sT "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
   hwclock --systohc
@@ -94,11 +89,22 @@ finish_installation() {
 }
 
 install_arch() {
-  user_configurations
-  format_disk
-  install_base
-  config_system
-  finish_installation
+  if [ -z "$USER" ]
+  then
+    user_configurations
+  fi
+
+  if [ "$1" == "config" ]
+  then
+    config_system
+    finish_installation
+  else
+    format_disk
+    install_base
+    genfstab -U /mnt >> /mnt/etc/fstab
+    cp $0 /mnt/install.sh
+    arch-chroot /mnt USER=$USER PASSWORD=$PASSWORD HOSTNAME=$HOSTNAME ./install.sh config
+  fi
 }
 
 install_arch
