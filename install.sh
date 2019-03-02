@@ -72,6 +72,7 @@ create_user() {
   echo "Creating user"
   useradd -m -s /bin/zsh -G root "$USERNAME"
   echo -en "$PASSWORD\n$PASSWORD" | passwd "$USERNAME"
+  echo "root ALL=(ALL) ALL" >> /etc/sudoers
 }
 
 config_system() {
