@@ -86,11 +86,19 @@ config_system() {
   create_user
 }
 
+finish_installation() {
+  exit
+  umount /mnt/boot
+  umount /mnt
+  restart
+}
+
 install_arch() {
   user_configurations
   format_disk
   install_base
   config_system
+  finish_installation
 }
 
 install_arch
