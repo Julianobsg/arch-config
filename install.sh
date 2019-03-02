@@ -84,7 +84,13 @@ config_system() {
   create_user
 }
 
+install_grub() {
+  pacman -S grub
+  grub-install --target=i386-pc $DISK
+}
+
 finish_installation() {
+  install_grub
   exit
   umount /mnt/boot
   umount /mnt
