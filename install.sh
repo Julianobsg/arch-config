@@ -89,9 +89,13 @@ finish_installation() {
 }
 
 install_arch() {
-  if [ -z "$USERNAME" ]
+  if [ -z "$2" ]
   then
     user_configurations
+  else
+    $USERNAME = $2
+    $PASSWORD = $3
+    $HOSTNAME = $4
   fi
 
   if [ "$1" == "config" ]
@@ -103,7 +107,7 @@ install_arch() {
     install_base
     genfstab -U /mnt >> /mnt/etc/fstab
     cp $0 /mnt/install.sh
-    arch-chroot /mnt USERNAME=$USERNAME PASSWORD=$PASSWORD HOSTNAME=$HOSTNAME ./install.sh config
+    arch-chroot /mnt ./install.sh config $USERNAME $PASSWORD $HOSTNAME
   fi
 }
 
