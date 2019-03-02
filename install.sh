@@ -56,8 +56,6 @@ install_base() {
 }
 
 config_locale() {
-  echo 'LANG="en_US.UTF-8"' >> /etc/locale.conf
-  echo 'LC_COLLATE="C"' >> /etc/locale.conf
   echo  $LOCALE >> /etc/locale.gen
   locale-gen
 }
@@ -71,6 +69,7 @@ EOF
 }
 
 create_user() {
+  echo "Creating user"
   useradd -m -s /bin/zsh -G root sudo "$USERNAME"
   echo -en "$PASSWORD\n$PASSWORD" | passwd "$USERNAME"
 }
@@ -78,6 +77,7 @@ create_user() {
 config_system() {
   genfstab -U /mnt >> /mnt/etc/fstab
   arch-chroot /mnt
+  echo "Start system configurations"
   ln -sT "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
   hwclock --systohc
   config_locale
@@ -90,7 +90,7 @@ finish_installation() {
   exit
   umount /mnt/boot
   umount /mnt
-  restart
+  echo "Config finished, please boot your system."
 }
 
 install_arch() {
