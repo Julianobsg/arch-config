@@ -93,6 +93,7 @@ install_grub() {
 
 finish_installation() {
   install_grub
+  rm /install.sh
   exit
   umount /mnt/boot
   umount /mnt
