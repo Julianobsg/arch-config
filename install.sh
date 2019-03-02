@@ -85,7 +85,7 @@ config_system() {
 }
 
 install_grub() {
-  pacman -Sy grub
+  yes | pacman -S grub
   grub-install --target=i386-pc $DISK
   grub-mkconfig -o /boot/grub/grub.cfg
 }
