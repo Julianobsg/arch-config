@@ -75,6 +75,11 @@ create_user() {
   echo "root ALL=(ALL) ALL" >> /etc/sudoers
 }
 
+install_tools() {
+  local tools= zsh wget
+  yes | pacman -S $tools
+}
+
 config_system() {
   echo "Start system configurations"
   ln -sT "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
@@ -83,6 +88,7 @@ config_system() {
   set_hostname
   echo -en "$PASSWORD\n$PASSWORD" | passwd
   create_user
+  install_tools
 }
 
 install_grub() {
