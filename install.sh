@@ -76,7 +76,7 @@ create_user() {
 }
 
 install_tools() {
-  local tools= zsh wget
+  local tools= zsh wget htop
   yes | pacman -S $tools
 }
 
