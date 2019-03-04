@@ -71,7 +71,7 @@ EOF
 create_user() {
   echo "Creating user"
   groupadd sudo
-  useradd -m -s /bin/zsh -G root sudo "$USERNAME"
+  useradd -m -s /bin/zsh -G root,sudo "$USERNAME"
   echo -en "$PASSWORD\n$PASSWORD" | passwd "$USERNAME"
   echo "%sudo ALL=(ALL) ALL" >> /etc/sudoers
 }
