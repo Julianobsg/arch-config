@@ -18,6 +18,8 @@ if [[ "$(tty)" == '/dev/tty1' ]]; then
   exec startx
 fi
 EOL
+
+  yes | pacman -S rxvt-unicode
 }
 
 install_x
