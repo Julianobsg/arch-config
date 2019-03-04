@@ -4,8 +4,6 @@ VIDEO_DRIVER=xf86-video-intel libva-intel-driver
 install_x(){
   yes | pacman -S $VIDEO_DRIVER
   pacman -S --noconfirm xorg-apps xorg-server xorg-xinit xterm
-  Xorg :0 -configure
-  cp /root/xorg.conf.new /etc/X11/xorg.conf
 }
 
 install_i3() {
