@@ -14,16 +14,13 @@ install_lxdm() {
 
 install_i3() {
   yes | pacman -S i3-wm i3status dmenu ttf-dejavu
-  cat > ~/.xinitrc <<EOF
-#!/bin/bash
-exec i3
-EOF
 
   cat >> /etc/profile  << EOL
 if [[ "$(tty)" == '/dev/tty1' ]]; then
   exec startx
 fi
 EOL
+
   install_lxdm
 
   yes | pacman -S rxvt-unicode
