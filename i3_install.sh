@@ -11,12 +11,19 @@ install_lightdm() {
   systemctl enable lightdm.service -f
 }
 
+install_yay() {
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  yes | makepkg -si
+}
+
 install_i3() {
   yes | pacman -S i3-wm i3status dmenu ttf-dejavu
 
   install_lightdm
 
-  yes | pacman -S rxvt-unicode
+  yes | pacman -S rxvt-unicode git
+  install_yay
 }
 
 install_x
