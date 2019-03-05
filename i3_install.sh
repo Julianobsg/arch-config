@@ -6,16 +6,15 @@ install_x(){
   pacman -S --noconfirm xorg-apps xorg-server xorg-xinit xterm
 }
 
-install_lxdm() {
-  yes | pacman -S lxdm
-  echo session=/usr/bin/i3 >> /etc/lxdm/lxdm.conf
-  systemctl enable lxdm.service -f
+install_lightdm() {
+  yes | pacman -S lightdm lightdm-gtk-greeter
+  systemctl enable lightdm.service -f
 }
 
 install_i3() {
   yes | pacman -S i3-wm i3status dmenu ttf-dejavu
 
-  install_lxdm
+  install_lightdm
 
   yes | pacman -S rxvt-unicode
 }
