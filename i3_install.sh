@@ -22,7 +22,7 @@ install_i3() {
 
   install_lightdm
 
-  yes | pacman -S rxvt-unicode git vim
+  yes | pacman -S rxvt-unicode git vim ranger
   install_yay
   yay --noconfirm -S google-chrome
 }
