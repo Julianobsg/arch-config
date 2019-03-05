@@ -24,6 +24,7 @@ install_i3() {
 
   yes | pacman -S rxvt-unicode git
   install_yay
+  yay --noconfirm -S google-chrome
 }
 
 install_x
