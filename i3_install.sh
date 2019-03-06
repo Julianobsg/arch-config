@@ -24,7 +24,7 @@ install_i3() {
 
   yes | pacman -S rxvt-unicode git vim ranger
   install_yay
-  yay --noconfirm -S google-chrome
+  yay --noconfirm -S google-chrome urxvt-tabbedex
 }
 
 install_x
