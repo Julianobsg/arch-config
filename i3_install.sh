@@ -15,6 +15,8 @@ install_yay() {
   git clone https://aur.archlinux.org/yay.git
   cd yay
   yes | makepkg -si
+  cd ..
+  rm -rf yay
 }
 
 install_i3() {
