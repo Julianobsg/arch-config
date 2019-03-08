@@ -80,7 +80,7 @@ create_user() {
 }
 
 install_tools() {
-  local tools='zsh wget htop'
+  local tools='zsh wget htop display wpa_supplicant'
   yes | pacman -S $tools
 }
 
