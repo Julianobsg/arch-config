@@ -20,7 +20,7 @@ install_yay() {
 }
 
 install_i3() {
-  yes | pacman -S i3-wm i3status dmenu ttf-dejavu ttf-inconsolata dunst libnotify xdg-utils
+  yes | pacman -S i3-wm i3status dmenu ttf-dejavu ttf-inconsolata dunst libnotify xdg-utils gnome-icon-theme
 
   install_lightdm
 
