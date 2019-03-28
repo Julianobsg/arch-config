@@ -42,7 +42,7 @@ format_disk() {
     parted -s "$DISK"
       mkpart primary fat32 1 "$boot_size"M \
       set 1 esp on
-    mkfs.fat -F32 -L boot "$boot_dev"
+    mkfs.fat -F32 "$boot_dev"
   else
     parted -s "$DISK"
       mkpart primary ext2 1 "$boot_size"M
