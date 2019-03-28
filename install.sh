@@ -8,7 +8,6 @@ LOCALE='en_US.UTF-8 UTF-8\n pt_BR.UTF-8 UTF-8'
 USERNAME=$2
 PASSWORD=$3
 HOSTNAME=$4
-EFI=[ -d '/sys/firmware/efi/efivars' ]
 
 user_configurations() {
   echo "Choose your user name"
@@ -27,10 +26,8 @@ config_partitions() {
   echo "Formatting disk"
   parted -s "$DISK" \
     mklabel msdos \
-    EFI && mkpart primary fat32 1 "$boot_size"M || mkpart primary ext2 1 "$boot_size"M \
     mkpart primary ext4 $memory_addr 100% \
     mkpart primary linux-swap "$boot_size"M  $memory_addr \
-    EFI && set 1 esp on || set 1 bios_grub on \
     set 2 LVM on \
     set 3 LVM on
 }
@@ -40,9 +37,21 @@ format_disk() {
   local lvm_dev="$DISK"2
   local swap_dev="$DISK"3
 
+  if [ -d '/sys/firmware/efi/efivars' ]
+  then
+    parted -s "$DISK"
+      mkpart primary fat32 1 "$boot_size"M \
+      set 1 esp on
+    mkfs.fat -F32 -L boot "$boot_dev"
+  else
+    parted -s "$DISK"
+      mkpart primary ext2 1 "$boot_size"M
+      set 1 bios_grub on
+    mkfs.ext2 -L boot "$boot_dev"
+  fi
+
   config_partitions
 
-  EFI && mkfs.fat32 -L boot "$boot_dev" || mkfs.ext2 -L boot "$boot_dev"
   mkfs.ext4 -L root "$lvm_dev"
   mkswap $swap_dev
   swapon $swap_dev
