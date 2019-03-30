@@ -8,6 +8,7 @@ LOCALE='en_US.UTF-8 UTF-8\n pt_BR.UTF-8 UTF-8'
 USERNAME=$2
 PASSWORD=$3
 HOSTNAME=$4
+BOOT_SIZE=256
 
 is_efi() {
   [ -d '/sys/firmware/efi/efivars' ]
@@ -23,15 +24,14 @@ user_configurations() {
 }
 
 config_partitions() {
-  local boot_size=256
   local memory=$(vmstat -s -S M | grep 'total memory' | tr -dc '0-9')
-  local memory_addr=$(($memory + $boot_size))M
+  local memory_addr=$(($memory + $BOOT_SIZE))M
 
   echo "Formatting disk"
   parted -s "$DISK" \
     mklabel msdos \
     mkpart primary ext4 $memory_addr 100% \
-    mkpart primary linux-swap "$boot_size"M  $memory_addr \
+    mkpart primary linux-swap "$BOOT_SIZE"M  $memory_addr \
     set 2 LVM on \
     set 3 LVM on
 }
@@ -44,12 +44,12 @@ format_disk() {
   if is_efi
   then
     parted -s "$DISK"
-      mkpart primary fat32 1 "$boot_size"M \
+      mkpart primary fat32 1 "$BOOT_SIZE"M \
       set 1 esp on
     mkfs.fat -F32 "$boot_dev"
   else
     parted -s "$DISK"
-      mkpart primary ext2 1 "$boot_size"M
+      mkpart primary ext2 1 "$BOOT_SIZE"M
       set 1 bios_grub on
     mkfs.ext2 -L boot "$boot_dev"
   fi
