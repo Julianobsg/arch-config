@@ -28,12 +28,28 @@ config_partitions() {
   local memory_addr=$(($memory + $BOOT_SIZE))M
 
   echo "Formatting disk"
-  parted -s "$DISK" \
-    mklabel msdos \
-    mkpart primary ext4 $memory_addr 100% \
-    mkpart primary linux-swap "$BOOT_SIZE"M  $memory_addr \
-    set 2 LVM on \
-    set 3 LVM on
+
+  if is_efi
+  then
+    parted -s "$DISK"
+      mklabel msdos \
+      mkpart primary fat32 1 "$BOOT_SIZE"M \
+      mkpart primary ext4 $memory_addr 100% \
+      mkpart primary linux-swap "$BOOT_SIZE"M  $memory_addr \
+      set 1 esp on \
+      set 2 LVM on \
+      set 3 LVM on
+
+  else
+    parted -s "$DISK"
+      mklabel msdos \
+      mkpart primary ext2 1 "$BOOT_SIZE"M \
+      mkpart primary ext4 $memory_addr 100% \
+      mkpart primary linux-swap "$BOOT_SIZE"M  $memory_addr \
+      set 1 bios_grub on \
+      set 2 LVM on \
+      set 3 LVM on
+  fi
 }
 
 format_disk() {
@@ -41,21 +57,9 @@ format_disk() {
   local lvm_dev="$DISK"2
   local swap_dev="$DISK"3
 
-  if is_efi
-  then
-    parted -s "$DISK"
-      mkpart primary fat32 1 "$BOOT_SIZE"M \
-      set 1 esp on
-    mkfs.fat -F32 "$boot_dev"
-  else
-    parted -s "$DISK"
-      mkpart primary ext2 1 "$BOOT_SIZE"M
-      set 1 bios_grub on
-    mkfs.ext2 -L boot "$boot_dev"
-  fi
-
   config_partitions
 
+  is_efi && mkfs.fat -F32 "$boot_dev" || mkfs.ext2 -L boot "$boot_dev"
   mkfs.ext4 -L root "$lvm_dev"
   mkswap $swap_dev
   swapon $swap_dev
