@@ -9,6 +9,10 @@ USERNAME=$2
 PASSWORD=$3
 HOSTNAME=$4
 
+is_efi() {
+  [ -d '/sys/firmware/efi/efivars' ]
+}
+
 user_configurations() {
   echo "Choose your user name"
   read USERNAME
@@ -37,7 +41,7 @@ format_disk() {
   local lvm_dev="$DISK"2
   local swap_dev="$DISK"3
 
-  if [ -d '/sys/firmware/efi/efivars' ]
+  if is_efi
   then
     parted -s "$DISK"
       mkpart primary fat32 1 "$boot_size"M \
@@ -107,7 +111,12 @@ config_system() {
 
 install_grub() {
   yes | pacman -S grub
-  grub-install --target=i386-pc $DISK
+  if is_efi
+  then
+    grub-install --target=x86_64-efi --efi-directory=boot --bootloader-id=arch
+  else
+    grub-install --target=i386-pc $DISK
+  fi
   grub-mkconfig -o /boot/grub/grub.cfg
 }
 
