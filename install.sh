@@ -39,7 +39,6 @@ config_partitions() {
       set 1 esp on \
       set 2 LVM on \
       set 3 LVM on
-
   else
     parted -s "$DISK"
       mklabel msdos \
