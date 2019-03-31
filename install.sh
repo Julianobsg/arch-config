@@ -31,8 +31,8 @@ config_partitions() {
 
   if is_efi
   then
-    parted -s "$DISK"
-      mklabel msdos \
+    parted -s "$DISK" \
+      mklabel gpt \
       mkpart primary fat32 1 "$BOOT_SIZE"M \
       mkpart primary ext4 $memory_addr 100% \
       mkpart primary linux-swap "$BOOT_SIZE"M  $memory_addr \
@@ -40,7 +40,7 @@ config_partitions() {
       set 2 LVM on \
       set 3 LVM on
   else
-    parted -s "$DISK"
+    parted -s "$DISK" \
       mklabel msdos \
       mkpart primary ext2 1 "$BOOT_SIZE"M \
       mkpart primary ext4 $memory_addr 100% \
