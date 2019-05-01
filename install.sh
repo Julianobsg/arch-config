@@ -126,6 +126,7 @@ install_grub() {
 
 install_i3() {
   echo "Installing i3 and dependencies"
+  su $USERNAME
   sh -c "`curl -fsSL https://raw.githubusercontent.com/Julianobsg/arch-config/master/i3_install.sh`"
 }
 
@@ -150,8 +151,7 @@ install_arch() {
     install_i3
     finish_installation
   else
-    format_disk
-    install_base
+    format_disk install_base
     genfstab -U /mnt >> /mnt/etc/fstab
     cp $0 /mnt/install.sh
     arch-chroot /mnt ./install.sh config $USERNAME $PASSWORD $HOSTNAME
