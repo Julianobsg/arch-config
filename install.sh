@@ -151,7 +151,8 @@ install_arch() {
     install_i3
     finish_installation
   else
-    format_disk install_base
+    format_disk
+    install_base
     genfstab -U /mnt >> /mnt/etc/fstab
     cp $0 /mnt/install.sh
     arch-chroot /mnt ./install.sh config $USERNAME $PASSWORD $HOSTNAME
