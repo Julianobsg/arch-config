@@ -103,6 +103,7 @@ install_tools() {
 
 config_system() {
   echo "Start system configurations"
+  mv /etc/localtime /etc/localtime_original
   ln -sT "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
   hwclock --systohc
   config_locale
