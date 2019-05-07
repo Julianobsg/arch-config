@@ -86,6 +86,7 @@ set_hostname() {
 ::1  localhost
 127.0.1.1 $HOSTNAME.localdomain	$HOSTNAME
 EOF
+hostnamectl set-hostname $HOSTNAME
 }
 
 create_user() {
