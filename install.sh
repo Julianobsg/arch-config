@@ -19,6 +19,16 @@ user_configurations() {
   read USERNAME
   echo "Set your root password"
   read -s PASSWORD
+  echo "Please, confirm the root password"
+  read -s PASSWORD_CONFIRMATION
+  while [ $PASSWORD != $PASSWORD_CONFIRMATION ]
+  do
+    echo "Error: The password does not match!"
+    echo "Please: try again:"
+    read -s PASSWORD
+    echo "Please, confirm the root password:"
+    read -s PASSWORD_CONFIRMATION
+  done
   echo "Set your hostname:"
   read HOSTNAME
 }
