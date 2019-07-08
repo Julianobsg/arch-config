@@ -31,6 +31,15 @@ user_configurations() {
   done
   echo "Set your hostname:"
   read HOSTNAME
+  echo "Choose your device to format: (Default device $DISK)"
+  parted -l
+  read CHOSEN_DEVICE
+  if [ -z $CHOSEN_DEVICE ]
+  then
+    echo "We will use the default then"
+  else
+    $DISK = "/dev/$CHOSEN_DEVICE"
+  fi
 }
 
 config_partitions() {
