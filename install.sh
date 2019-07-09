@@ -31,8 +31,9 @@ user_configurations() {
   done
   echo "Set your hostname:"
   read HOSTNAME
-  echo "Choose your device to format: (Default device $DISK)"
+  echo "Listing disks"
   parted -l
+  echo "Choose your device to format: (Default device $DISK)"
   read CHOSEN_DEVICE
   if [ -z $CHOSEN_DEVICE ]
   then
