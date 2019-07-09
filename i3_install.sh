@@ -1,5 +1,5 @@
 #!/bin/bash
-VIDEO_DRIVER=xf86-video-intel libva-intel-driver
+VIDEO_DRIVER='xf86-video-intel libva-intel-driver'
 
 install_x(){
   yes | sudo pacman -S $VIDEO_DRIVER
@@ -12,11 +12,13 @@ install_lightdm() {
 }
 
 install_yay() {
-  sudo git clone https://aur.archlinux.org/yay.git
+  cd ~/
+  git clone https://aur.archlinux.org/yay.git
   cd yay
   yes | makepkg -si
   cd ..
   rm -rf yay
+  cd /
 }
 
 install_i3() {
@@ -30,4 +32,4 @@ install_i3() {
 }
 
 install_x
-install_i3 $1
+install_i3
