@@ -12,9 +12,9 @@ install_lightdm() {
 }
 
 install_yay() {
-  git clone https://aur.archlinux.org/yay.git
+  sudo git clone https://aur.archlinux.org/yay.git
   cd yay
-  yes | makepkg -si
+  yes | sudo makepkg -si
   cd ..
   rm -rf yay
 }
