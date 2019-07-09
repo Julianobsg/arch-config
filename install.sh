@@ -151,7 +151,7 @@ install_grub() {
 
 install_i3() {
   echo "Installing i3 and dependencies"
-  sudo -i -u $USERNAME sh -c "`curl -fsSL https://raw.githubusercontent.com/Julianobsg/arch-config/master/i3_install.sh`"
+  sudo -i -u $USERNAME | sh -c "`curl -fsSL https://raw.githubusercontent.com/Julianobsg/arch-config/master/i3_install.sh`"
 }
 
 finish_installation() {
