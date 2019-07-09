@@ -8,7 +8,7 @@ install_x(){
 
 install_lightdm() {
   yes | sudo -i pacman -S lightdm lightdm-gtk-greeter
-  systemctl enable lightdm.service -f
+  sudo -i systemctl enable lightdm.service -f
 }
 
 install_yay() {
