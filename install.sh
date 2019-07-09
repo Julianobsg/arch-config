@@ -170,7 +170,7 @@ install_arch() {
   if [ "$1" == "config" ]
   then
     config_system
-    install_i3
+    install_i3 $2
     finish_installation
   else
     format_disk
