@@ -115,6 +115,7 @@ create_user() {
   useradd -m -s /bin/zsh -G root,sudo "$USERNAME"
   echo -en "$PASSWORD\n$PASSWORD" | passwd "$USERNAME"
   echo "%sudo ALL=(ALL) ALL" >> /etc/sudoers
+  echo "# Config your zshrc file" >> /home/"$USERNAME"/.zshrc
 }
 
 install_tools() {
@@ -172,7 +173,7 @@ install_arch() {
   if [ "$1" == "config" ]
   then
     config_system
-    install_i3 $2
+    install_i3
     finish_installation
   else
     format_disk
