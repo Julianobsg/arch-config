@@ -142,7 +142,7 @@ install_grub() {
     yes | pacman -S efibootmgr
     grub-install --target=x86_64-efi --efi-directory=boot --bootloader-id=arch
     mkdir boot/EFI/boot
-    cp boot/EFI/grub_uefi/grubx64.efi boot/EFI/boot/bootx64.efi
+    cp boot/EFI/arch/grubx64.efi boot/EFI/boot/bootx64.efi
   else
     grub-install --target=i386-pc $DISK
   fi
