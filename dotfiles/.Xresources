@@ -1,0 +1,3 @@
+! copy paste: alt
+URxvt.keysym.A-c:     perl:clipboard:copy
+URxvt.keysym.A-v:     perl:clipboard:paste

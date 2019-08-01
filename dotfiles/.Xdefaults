@@ -15,10 +15,6 @@ Xft.hintstyle:              hintslight
 ! http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.1.pod
 !-------------------------------------------------------------------------------
 
-! copy paste: alt
-URxvt.keysym.M-c:     perl:clipboard:copy
-URxvt.keysym.M-v:     perl:clipboard:paste
-
 URxvt.depth:                32
 URxvt.geometry:             90x30
 URxvt.transparent:          false
@@ -44,7 +40,7 @@ URxvt.scrollStyle:          rxvt
 URxvt.scrollBar:            false
 
 ! Perl extensions
-URxvt.perl-ext-common:      default,matcher,tabbedex
+URxvt.perl-ext-common:      default,matcher,tabbedex,clipboard
 URxvt.matcher.button:       1
 URxvt.url-launcher:         google-chrome-stable
 
@@ -53,6 +49,10 @@ URxvt.tabbed.autohide: true
 URxvt.keysym.M-t: perl:tabbedex:new_tab
 URxvt.keysym.M-Right: perl:tabbedex:next_tab
 URxvt.keysym.M-Left: perl:tabbedex:prev_tab
+
+! copy paste: alt
+URxvt.keysym.M-c:     perl:clipboard:copy
+URxvt.keysym.M-v:     perl:clipboard:paste
 
 ! Cursor
 URxvt.cursorBlink:          true
