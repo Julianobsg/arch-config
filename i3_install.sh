@@ -3,12 +3,12 @@ VIDEO_DRIVER='xf86-video-intel libva-intel-driver'
 
 install_x(){
   yes | sudo -i pacman -S $VIDEO_DRIVER
-  sudo -i pacman -S --noconfirm xorg-apps xorg-server xorg-xinit xterm
+  yes | sudo -i pacman -S --noconfirm xorg-apps xorg-server xorg-xinit xterm
 }
 
 install_lightdm() {
   yes | sudo -i pacman -S lightdm lightdm-gtk-greeter
-  sudo -i systemctl enable lightdm.service -f
+  yes | sudo -i systemctl enable lightdm.service -f
 }
 
 install_yay() {
