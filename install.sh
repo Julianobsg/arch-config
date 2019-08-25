@@ -4,7 +4,7 @@ DISK='/dev/sda'
 
 # System configuration variables
 TIMEZONE='America/Sao_Paulo'
-LOCALE='en_US.UTF-8 UTF-8\n pt_BR.UTF-8 UTF-8'
+LOCALE='en_US.UTF-8 UTF-8\npt_BR.UTF-8 UTF-8'
 USERNAME=$2
 PASSWORD=$3
 HOSTNAME=$4
@@ -93,7 +93,7 @@ install_base() {
 }
 
 config_locale() {
-  echo  $LOCALE >> /etc/locale.gen
+  printf $LOCALE >> /etc/locale.gen
   locale-gen
   cat > /etc/locale.conf <<EOF
 LANG=en_US.UTF-8
