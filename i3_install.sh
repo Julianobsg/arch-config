@@ -28,7 +28,7 @@ install_i3() {
 
   yes | sudo -i pacman -S rxvt-unicode git vim ranger urxvt-perls
   install_yay
-  yay --noconfirm -S google-chrome urxvt-tabbedex ttf-meslo ttf-mensch otf-inconsolata-dz-powerline
+  yay --noconfirm -S google-chrome urxvt-tabbedex ttf-meslo ttf-mensch otf-inconsolata-dz-powerline wpa-cute
 }
 
 install_x
