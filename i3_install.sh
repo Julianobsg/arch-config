@@ -26,7 +26,7 @@ install_i3() {
 
   install_lightdm
 
-  yes | sudo -i pacman -S rxvt-unicode git vim ranger
+  yes | sudo -i pacman -S rxvt-unicode git vim ranger urxvt-perls
   install_yay
   yay --noconfirm -S google-chrome urxvt-tabbedex ttf-meslo ttf-mensch otf-inconsolata-dz-powerline
 }
