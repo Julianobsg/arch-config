@@ -170,6 +170,6 @@ bar {
 }
 
 # Lock screen
-bindsym $mod+Control+l exec "dm-tool lock"
+bindsym $mod+Control+l exec "dm-tool switch-to-greeter"
 
 bindsym $mod+x move workspace to output left
