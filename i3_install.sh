@@ -31,7 +31,7 @@ install_i3() {
   yay --noconfirm -S google-chrome urxvt-tabbedex ttf-meslo ttf-mensch otf-inconsolata-dz-powerline wpa-cute
 
   yes | sudo -i pacman -S dialog
-  yay --noconfirm -S i3lock-fancy
+  yay --noconfirm -S i3lock-fancy polybar
 }
 
 install_x
