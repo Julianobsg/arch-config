@@ -12,4 +12,4 @@ function disconnect(){
       xrandr --output HDMI-1 --off
 }
 
-xrandr | grep "HDMI1 connected" &> /dev/null && connect || disconnect
+xrandr | grep "HDMI-1 connected" &> /dev/null && connect || disconnect
