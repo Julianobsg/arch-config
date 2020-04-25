@@ -1,0 +1,170 @@
+#  ___               
+# |   \ _  _ _ _  __| |_
+# | |) | || | ' \(_-<  _|
+# |___/ \_,_|_||_/__/\__|
+#
+# Author: Benedikt Vollmerhaus <benedikt@vollmerhaus.org>
+# License: MIT
+#
+# https://github.com/dunst-project/dunst/blob/master/dunstrc
+
+[global]
+
+#  __
+# |  \. _ _ |  _
+# |__/|_)|_)|_(_|\/
+#        |       /
+
+follow = keyboard
+
+# Size and position of the window:
+#   [{width}]x{height}[+/-{x}+/-{y}]
+#
+# The height is measured in no. of notifications, everything else
+# in pixels. If the width is omitted but the height is given, the
+# message window expands over the whole screen. If the width is 0,
+# it expands to the longest message displayed.
+geometry = "320x5-30+58"
+
+indicate_hidden = yes
+
+
+#
+#  /\  _  _  _  _  _ _  _  _ _
+# /--\|_)|_)(/_(_|| (_|| |(_(/_
+#     |  |
+
+# Vertical padding between text and separator
+padding = 10
+
+horizontal_padding = 14
+
+frame_width = 2
+frame_color = "#141414"
+
+separator_height = 2
+separator_color = frame
+
+
+#  __
+# /   _  _ _|_ _  _ _|_
+# \__(_)| | | (/_| | |
+#
+
+font = M+ 1m 11
+
+markup = full
+format = "<b>%s</b>\n%b"
+
+# Split text into multiple lines if it doesn't fit the window width
+word_wrap = yes
+
+
+#  __
+# |__) _ |_  _   . _  _
+# |__)(/_| |(_|\/|(_)|
+#
+
+# Sort notifications by urgency
+sort = yes
+
+# Seconds with no mouse or keyboard input after which to consider the
+# user idle and not remove non-transient notifications (0 to disable)
+idle_threshold = 90
+
+# Seconds after which to display a notification's age (-1 to disable)
+show_age_threshold = 60
+
+# Display indicators for URLs (U) and actions (A)
+show_indicators = yes
+
+stack_duplicates = true
+hide_duplicate_count = false
+
+
+#
+# | _ _  _  _
+# |(_(_)| |_)
+#
+
+icon_path = /usr/share/icons/Papirus-Dark/22x22/status/:/usr/share/icons/Papirus-Dark/22x22/devices/:/usr/share/icons/Papirus-Dark/22x22/panel/
+icon_position = right
+max_icon_size = 22
+
+
+#
+# |__|. __|_ _  _
+# |  ||_) | (_)| \/
+#                /
+
+# Whether notifications recalled from history should be sticky
+# (persist until closed) or time out as they would normally do
+sticky_history = false
+
+# Maximum number of notifications kept in history
+history_length = 10
+
+
+#
+# | | _ _  _  _  _
+# |_|| (_|(/_| |(_\/
+#       _|        /
+
+[urgency_low]
+background = "#0a0a0a"
+foreground = "#c8c8c8"
+timeout = 5
+
+[urgency_normal]
+background = "#0a0a0a"
+foreground = "#c8c8c8"
+timeout = 10
+icon = dialog-information
+
+[urgency_critical]
+background = "#0a0a0a"
+foreground = "#c8c8c8"
+timeout = 0
+icon = dialog-error
+
+
+#
+#  /\  _|   _  _  _ _  _|
+# /--\(_|\/(_|| |(_(/_(_|
+#
+
+startup_notification = true
+
+# Program for displaying the context menu
+dmenu = /usr/bin/rofi -dmenu -p dunst
+
+# Browser for opening URLs in the context menu
+browser = /usr/bin/firefox -new-tab
+
+
+#            __
+# |_/ _     |__). _  _|. _  _  _
+# | \(/_\/  |__)|| |(_||| |(_|_)
+#       /                   _|
+#
+# Shortcuts are specified as [modifier+][modifier+]...key
+#
+# Available modifiers:
+#   * ctrl
+#   * mod1 (alt)
+#   * mod2
+#   * mod3
+#   * mod4 (super)
+
+[shortcuts]
+close = ctrl+space
+close_all = ctrl+shift+space
+
+# Redisplay the last notification in history
+history = ctrl+dead_grave
+
+# Context menu for selecting URLs and actions
+context = ctrl+shift+period
+
+# vim:filetype=dosini
+# kak:filetype=ini
