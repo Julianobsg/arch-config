@@ -8,6 +8,10 @@ sh -c "curl -fsSL https://raw.githubusercontent.com/Julianobsg/arch-config/maste
 
 Follow the steps to install.
 
+## Dotfiles
+
+Config the dotfiles using [stow](https://www.gnu.org/software/stow/).
+
 ## Thanks to:
 
 https://github.com/tom5760/arch-install/
