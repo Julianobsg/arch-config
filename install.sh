@@ -89,7 +89,7 @@ format_disk() {
 }
 
 install_base() {
-  pacstrap /mnt base base-devel
+  pacstrap /mnt base base-devel linux linux-firmware
 }
 
 config_locale() {
