@@ -30,7 +30,7 @@ install_i3() {
   install_yay
   yay --noconfirm -S google-chrome ttf-meslo ttf-mensch otf-inconsolata-dz-powerline wpa-cute
 
-  yes | sudo -i pacman -S dialog
+  yes | sudo -i pacman -S dialog stow openssh
   yay --noconfirm -S i3lock-fancy polybar
 }
 
