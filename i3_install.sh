@@ -27,6 +27,8 @@ install_i3() {
   install_lightdm
 
   yes | sudo -i pacman -S git vim ranger alacritty
+  yes | sudo -i pacman -S pulseaudio pulseaudio-alsa
+  yes | sudo -i pacman -S pulseaudio-bluetooth bluez bluez-utils blueman
   install_yay
   yay --noconfirm -S google-chrome ttf-meslo ttf-mensch otf-inconsolata-dz-powerline wpa-cute
 
